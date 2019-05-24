@@ -30,7 +30,7 @@ module.exports = ({
     info: "bold white",
     debug: "cyan",
   },
-}) => {
+} = {}) => {
   const logger = winston.createLogger({ levels });
 
   if (enableConsole) {
