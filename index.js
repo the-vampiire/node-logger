@@ -31,6 +31,10 @@ module.exports = (options = {}) => {
   }
 
   if (enableFiles) {
-    logger.add(rotatingError(errorMaxFiles)).add(rotatingCombined(combinedMaxFiles));
+    logger
+      .add(rotatingError(errorMaxFiles))
+      .add(rotatingCombined(combinedMaxFiles));
   }
+
+  return logger;
 };

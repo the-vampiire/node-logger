@@ -21,6 +21,12 @@ const logger = configLogger({ ... }); // custom options
 stuff.then(logger.info).catch(logger.error); // etc
 ```
 
+```js
+// shorthand
+const logger = require('@vampiire/node-logger')(); // default
+const logger = require('@vampiire/node-logger')({ ... }); // custom options
+```
+
 ## logging format
 
 ```sh
