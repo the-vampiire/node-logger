@@ -1,0 +1,20 @@
+{
+  "name": "@vampiire/node-logger",
+  "version": "0.1.0",
+  "description": "nodejs logger setup using winston and rotating log files",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/the-vampiire/node-logger.git"
+  },
+  "author": "Vampiire",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/the-vampiire/node-logger/issues"
+  },
+  "homepage": "https://github.com/the-vampiire/node-logger#readme",
+  "dependencies": {
+    "winston": "^3.2.1",
+    "winston-daily-rotate-file": "^3.9.0"
+  }
+}
