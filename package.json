@@ -1,6 +1,6 @@
 {
   "name": "@vampiire/node-logger",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "nodejs logger setup using winston and rotating log files",
   "main": "src/index.js",
   "repository": {
