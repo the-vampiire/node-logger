@@ -2,6 +2,15 @@ const winston = require("winston");
 
 const { console, rotatingError, rotatingCombined } = require("./transports");
 
+/**
+ * pre-configured Winston logger
+ * @param options.enableFiles enable writing error and combined log files
+ * @param options.errorMaxFiles max size / days to keep error log files
+ * @param options.combinedMaxFiles max size / days to keep combined log files
+ * @param options.enableConsole enable colorized console
+ * @param options.levels winston logger levels
+ * @param options.colors winston console level colors
+ */
 module.exports = (options = {}) => {
   const {
     enableFiles = process.env.NODE_ENV === "production",
