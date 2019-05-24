@@ -4,33 +4,33 @@ const { console, rotatingError, rotatingCombined } = require("./transports");
 
 /**
  * pre-configured Winston logger
- * @param options.enableFiles enable writing error and combined log files
- * @param options.errorMaxFiles max size / days to keep error log files
- * @param options.combinedMaxFiles max size / days to keep combined log files
- * @param options.enableConsole enable colorized console
- * @param options.levels winston logger levels
- * @param options.colors winston console level colors
+ *
+ * options:
+ * - enableFiles: enable writing error and combined log files
+ * - errorMaxFiles: max size / days to keep error log files
+ * - combinedMaxFiles: max size / days to keep combined log files
+ * - enableConsole: enable colorized console
+ * - levels: winston logger levels
+ * - colors: winston console level colors
  */
-module.exports = (options = {}) => {
-  const {
-    enableFiles = process.env.NODE_ENV === "production",
-    enableConsole = process.env.NODE_ENV !== "production",
-    errorMaxFiles = "14d",
-    combinedMaxFiles = "14d",
-    levels = {
-      error: 0,
-      warn: 1,
-      info: 2,
-      debug: 3,
-    },
-    colors = {
-      error: "bold red",
-      warn: "italic yellow",
-      info: "bold white",
-      debug: "cyan",
-    },
-  } = options;
-
+module.exports = ({
+  enableFiles = process.env.NODE_ENV === "production",
+  enableConsole = process.env.NODE_ENV !== "production",
+  errorMaxFiles = "14d",
+  combinedMaxFiles = "14d",
+  levels = {
+    error: 0,
+    warn: 1,
+    info: 2,
+    debug: 3,
+  },
+  colors = {
+    error: "bold red",
+    warn: "italic yellow",
+    info: "bold white",
+    debug: "cyan",
+  },
+}) => {
   const logger = winston.createLogger({ levels });
 
   if (enableConsole) {
