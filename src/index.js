@@ -2,6 +2,8 @@ const winston = require("winston");
 
 const { console, rotatingError, rotatingCombined } = require("./transports");
 
+const { format } = winston;
+
 /**
  * pre-configured Winston logger
  *
@@ -31,7 +33,10 @@ module.exports = ({
     debug: "cyan",
   },
 } = {}) => {
-  const logger = winston.createLogger({ levels });
+  const logger = winston.createLogger({
+    levels,
+    format: format.combine(format.json(), format.errors({ stack: true })),
+  });
 
   if (enableConsole) {
     logger.level = "debug";

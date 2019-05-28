@@ -1,8 +1,10 @@
 const { format } = require("winston");
 
-const printFormat = format.printf((info) => {
-  const { timestamp, message, level } = info;
-  return `${level} [${timestamp}]: ${JSON.stringify(message)}`;
+const printFormat = format.printf(info => {
+  const { timestamp, message, level, stack } = info;
+  const base = `${level} [${timestamp}]: ${message}`;
+
+  return stack ? `${base}\n${stack}` : base;
 });
 
 const timestampFormat = format.timestamp({ format: "HH:mm:ss" });
