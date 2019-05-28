@@ -11,14 +11,11 @@ $ npm i @vampiire/node-logger
 ```
 
 ```js
-const configLogger = require("@vampiire/node-logger");
+const createLogger = require("@vampiire/node-logger");
 
-const logger = configLogger(); // defaults
+const logger = createLogger(); // defaults
 
-const logger = configLogger({ ... }); // custom options
-
-// use the logger
-stuff.then(logger.info).catch(logger.error); // etc
+const logger = createLogger({ ... }); // custom options
 ```
 
 ```js
@@ -27,13 +24,37 @@ const logger = require('@vampiire/node-logger')(); // default
 const logger = require('@vampiire/node-logger')({ ... }); // custom options
 ```
 
+**usage for errors**
+
+- pass the error directly to the `logger.error`
+
+```js
+stuff.then().catch(logger.error);
+
+try {
+  stuff();
+} catch (error) {
+  logger.error(error);
+}
+```
+
 ## logging format
 
 ```sh
-<log level> [<HH:mm:ss timestamp>] - <JSON stringified message>
+<log level> [<HH:mm:ss timestamp>] - <message>
 ```
 
-## env vars
+**error format**
+
+```sh
+<log level> [<HH:mm:ss timestamp>] - <error.message>
+<
+  error stack trace
+  on new line
+>
+```
+
+## expected env vars
 
 ```sh
 NODE_ENV=
@@ -41,12 +62,19 @@ ERROR_LOGS_DIR=
 COMBINED_LOGS_DIR=
 ```
 
-- `ERROR_LOGS_DIR`: where the error log files will be written. **this directory must exist**
-- `COMBINED_LOGS_DIR`: where the combined log files will be written. **this directory must exist**
+- `NODE_ENV`
+  - `!== production`: enables console transport, disables file transports
+  - `=== production`: disables console transport, enables file transports
+  - override this behavior with ` options``.enableConsole `/`.enableFiles`
+- the directory paths can be:
+  - relative (to the project): `ERROR_LOGS_DIR=logs/errors`
+  - absolute (must exist / have permission to write): `ERROR_LOGS_DIR=/Users/username/logs/errors`
+- `ERROR_LOGS_DIR`: where the error log files will be written.
+- `COMBINED_LOGS_DIR`: where the combined log files will be written.
   - combined logs are written for all logs at or below the `logger.level` configuration
 - log files have the name `%DATE%.log` where the date is the current `YYYY-MM-DD` format
   - they are rotated daily (new file each day)
-  - the `maxFiles` option is set to 14 days by default
+  - the `maxFiles` option is set to 14 days by default (will keep logs up to 14 days before removing)
 
 ## configuration options & defaults
 
