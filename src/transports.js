@@ -10,18 +10,21 @@ const rotatingFileConfig = {
   filename: "%DATE%.log",
 };
 
-const rotatingError = maxFiles => new DailyRotateFile({
-  ...rotatingFileConfig,
-  maxFiles,
-  level: "error",
-  dirname: process.env.ERROR_LOGS_DIR,
-});
+const rotatingError = maxFiles =>
+  new DailyRotateFile({
+    ...rotatingFileConfig,
+    maxFiles,
+    level: "error",
+    dirname: process.env.ERROR_LOGS_DIR,
+  });
 
-const rotatingCombined = maxFiles => new DailyRotateFile({
-  ...rotatingFileConfig,
-  maxFiles,
-  dirname: process.env.COMBINED_LOGS_DIR,
-});
+const rotatingCombined = (maxFiles, level) =>
+  new DailyRotateFile({
+    ...rotatingFileConfig,
+    level,
+    maxFiles,
+    dirname: process.env.COMBINED_LOGS_DIR,
+  });
 
 module.exports = {
   console,
